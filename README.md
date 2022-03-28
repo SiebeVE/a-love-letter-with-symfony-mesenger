@@ -39,9 +39,11 @@
   - Extra info for transports/internal working
 - Middleware
   - `git checkout middleware`
+  - `php bin/console server:dump`
   - Default validation middleware
     - `\Symfony\Component\Messenger\Middleware\ValidationMiddleware::class`
-  - Add unique id to message with envelope
+  - Add unique id to message with envelope when message is first put on bus
+  - `git checkout middleware-fix`
   - Keep consumer running and restart on failure
     - Supervisor
     - Docker
@@ -51,6 +53,6 @@
 - Recap
 - Closing
   - Symfony docs messenger
+    - Different transports (rabbit mq,...)
+  - Easy setup, really flexible
   - Missing UI for view messages/easy retry
-
-- Differences between Laravel Horizon?
