@@ -26,12 +26,12 @@ final class SentLetter
             throw new LogicException('Unable to find letter!');
         }
 
-        if (random_int(0, 5) >= 1) {
-            throw new LogicException('Random fail!');
-        }
-
         if ($letter->getMessage() === 'unrec') {
             throw new UnrecoverableMessageHandlingException('This message won\'t be retried.');
+        }
+
+        if (random_int(0, 5) >= 1) {
+            throw new LogicException('Random fail!');
         }
 
         $this->letterService->send($letter);

@@ -26,6 +26,9 @@
 - Different transports/busses
   - `git checkout transports` 
   - Also interface for routing (multiple transports)
+  - Multiple consumers
+    - Priority support
+    - No retry transport
   - Sync transport (debugging, design pattern,...)
 - Middleware
   - Keep consumer running and restart on failure
