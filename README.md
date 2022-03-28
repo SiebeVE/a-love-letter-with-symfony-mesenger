@@ -23,9 +23,11 @@
     - `php bin/console messenger:failed:show`
     - `php bin/console messenger:failed:retry`
       - Auto removed after 3 retries!
-- Different transports/busses
+- Different transports
   - `git checkout transports` 
   - Also interface for routing (multiple transports)
+  - Add queue name to dsn
+  - `php bin/console messenger:consume priority async -vv`
   - Sync transport (debugging, design pattern,...)
 - Middleware
   - Keep consumer running and restart on failure

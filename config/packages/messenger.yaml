@@ -5,21 +5,26 @@ framework:
         transports:
             failed: 'doctrine://default?queue_name=failed'
             async:
-                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                dsn: 'doctrine://default?auto_setup=0&queue_name=async'
                 options:
                     use_notify: true
                     check_delayed_interval: 60000
                 retry_strategy:
                     max_retries: 1
-                    # milliseconds delay
                     delay: 1000
-                    # causes the delay to be higher before each retry
-                    # e.g. 1 second delay, 2 seconds, 4 seconds
                     multiplier: 2
                     max_delay: 3000
-                    # override all of this with a service that
-                    # implements Symfony\Component\Messenger\Retry\RetryStrategyInterface
-                    # service: null
+            priority:
+                dsn: 'doctrine://default?auto_setup=0&queue_name=priority'
+                options:
+                    use_notify: true
+                    check_delayed_interval: 60000
+                retry_strategy:
+                    max_retries: 1
+                    delay: 1000
+                    multiplier: 2
+                    max_delay: 3000
 
         routing:
            App\Message\SentLetter: async
+           App\Message\SentPackage: priority

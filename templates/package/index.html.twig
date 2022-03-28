@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Package index{% endblock %}
+
+{% block body %}
+    <h1>Package index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Content</th>
+                <th>Sent</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for package in packages %}
+            <tr>
+                <td>{{ package.id }}</td>
+                <td>{{ package.content }}</td>
+                <td>{{ package.sent ? 'Sent' : 'Waiting' }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_package_new') }}">Create new</a>
+{% endblock %}
