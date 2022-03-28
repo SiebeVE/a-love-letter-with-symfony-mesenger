@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Letter index{% endblock %}
+
+{% block body %}
+    <h1>Letter index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Message</th>
+                <th>Sent?</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for letter in letters %}
+            <tr>
+                <td>{{ letter.id }}</td>
+                <td>{{ letter.message }}</td>
+                <td>{{ letter.sent ? 'Sent' : 'Waiting' }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_letter_new') }}">Create new</a>
+{% endblock %}

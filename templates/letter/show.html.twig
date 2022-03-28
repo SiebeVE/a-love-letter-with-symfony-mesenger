@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Letter{% endblock %}
+
+{% block body %}
+    <h1>Letter</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ letter.id }}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>{{ letter.message }}</td>
+            </tr>
+            <tr>
+                <th>Sent</th>
+                <td>{{ letter.sent ? 'Sent':'Waiting' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_letter_index') }}">back to list</a>
+{% endblock %}
