@@ -20,7 +20,7 @@ class MessagesLogger implements MiddlewareInterface
     {
         $message = $envelope->getMessage();
 
-        if($message instanceof SentPackage) {
+        if(($message instanceof SentPackage) && $envelope->last(AckStamp::class) instanceof AckStamp) {
             $this->logger->info('Hurray, sending a package!');
             dump('Hurray, sending a package!');
         }
