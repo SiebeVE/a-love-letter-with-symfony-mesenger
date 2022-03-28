@@ -14,7 +14,7 @@ final class LetterService
 
     public function send(Letter $letter): void
     {
-        sleep(5);
+        sleep(20);
         $letter->setSent(true);
         $this->entityManager->persist($letter);
         $this->entityManager->flush();
