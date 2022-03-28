@@ -26,14 +26,14 @@
       - Auto removed after 3 retries!
 - Recap
 - Different transports
-  - `git checkout transports` 
+  - `git checkout transports`
   - Also interface for routing (multiple transports)
   - Add queue name to dsn
   - `php bin/console messenger:consume priority async -vv`
   - Sync transport (debugging, design pattern,...)
 - Recap
 - Envelopes & Stamps
-  - `git checkout envelope` 
+  - `git checkout envelope`
   - Delayed letter
     - `delay`
   - Extra info for transports/internal working
