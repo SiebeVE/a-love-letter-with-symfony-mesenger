@@ -12,12 +12,28 @@
 - Process messages
   - Show messages in DB
   - `php bin/console messenger:consume -vv`
-  - Edit consume, restart consumer 
+  - Edit consume, restart consumer
+- Recap
 - Failure handling
+  - `git checkout failure`
+  - Failure transport
+    - Even multiple, nothing special about them
+  - UnrecoverableFailure
+  - Handling failures/retries
+    - `php bin/console messenger:failed:show`
+    - `php bin/console messenger:failed:retry`
+      - Auto removed after 3 retries!
 - Different transports/busses
+  - `git checkout transports` 
   - Also interface for routing (multiple transports)
   - Sync transport (debugging, design pattern,...)
 - Middleware
+  - Keep consumer running and restart on failure
+    - Supervisor
+    - Docker
+    - k8s
+    - ! Watch out for memory limits, add memory-limit, limit messages
+      - Reset on message
 - Envelopes & Stamps
 
 - Differences between Laravel Horizon?

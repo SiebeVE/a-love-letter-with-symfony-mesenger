@@ -7,6 +7,7 @@ use App\LetterService\LetterService;
 use App\Repository\LetterRepository;
 use LogicException;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 
 #[AsMessageHandler]
 final class SentLetter
@@ -23,6 +24,14 @@ final class SentLetter
 
         if (!$letter instanceof Letter) {
             throw new LogicException('Unable to find letter!');
+        }
+
+        if (random_int(0, 5) >= 1) {
+            throw new LogicException('Random fail!');
+        }
+
+        if ($letter->getMessage() === 'unrec') {
+            throw new UnrecoverableMessageHandlingException('This message won\'t be retried.');
         }
 
         $this->letterService->send($letter);
