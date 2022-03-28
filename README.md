@@ -19,6 +19,7 @@
   - Failure transport
     - Even multiple, nothing special about them
   - UnrecoverableFailure
+    - `unrec`
   - Handling failures/retries
     - `php bin/console messenger:failed:show`
     - `php bin/console messenger:failed:retry`
@@ -29,6 +30,11 @@
   - Add queue name to dsn
   - `php bin/console messenger:consume priority async -vv`
   - Sync transport (debugging, design pattern,...)
+- Envelopes & Stamps
+  - Delayed letter
+    - `delay`
+  - Extra info for transports/internal working
+  - Rarely used by me
 - Middleware
   - Keep consumer running and restart on failure
     - Supervisor
@@ -36,6 +42,5 @@
     - k8s
     - ! Watch out for memory limits, add memory-limit, limit messages
       - Reset on message
-- Envelopes & Stamps
 
 - Differences between Laravel Horizon?

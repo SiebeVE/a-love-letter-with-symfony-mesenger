@@ -6,10 +6,13 @@ use App\Entity\Letter;
 use App\Form\LetterType;
 use App\Message\SentLetter;
 use App\Repository\LetterRepository;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DelayStamp;
 use Symfony\Component\Routing\Annotation\Route;
 
 class LetterController extends AbstractController
@@ -31,8 +34,15 @@ class LetterController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $letterRepository->add($letter);
+            $stamps = [];
+            if($letter->getMessage() === 'delay') {
+                $stamps[] = DelayStamp::delayUntil((new DateTimeImmutable())->modify('+1 hour'));
+            }
             $bus->dispatch(
-              new SentLetter($letter->getId())
+                new Envelope(
+                    new SentLetter($letter->getId()),
+                    $stamps
+                )
             );
             return $this->redirectToRoute('app_letter_index', [], Response::HTTP_SEE_OTHER);
         }
