@@ -37,9 +37,11 @@
   - Delayed letter
     - `delay`
   - Extra info for transports/internal working
-  - Rarely used by me
 - Middleware
   - `git checkout middleware`
+  - Default validation middleware
+    - `\Symfony\Component\Messenger\Middleware\ValidationMiddleware::class`
+  - Add unique id to message with envelope
   - Keep consumer running and restart on failure
     - Supervisor
     - Docker

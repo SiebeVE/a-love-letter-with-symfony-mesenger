@@ -28,3 +28,8 @@ framework:
         routing:
            App\Message\SentLetter: async
            App\Message\SentPackage: priority
+
+        buses:
+            messenger.bus.default:
+                middleware:
+                    - App\Middleware\MessagesLogger
