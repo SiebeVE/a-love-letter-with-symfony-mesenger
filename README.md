@@ -24,23 +24,31 @@
     - `php bin/console messenger:failed:show`
     - `php bin/console messenger:failed:retry`
       - Auto removed after 3 retries!
+- Recap
 - Different transports
   - `git checkout transports` 
   - Also interface for routing (multiple transports)
   - Add queue name to dsn
   - `php bin/console messenger:consume priority async -vv`
   - Sync transport (debugging, design pattern,...)
+- Recap
 - Envelopes & Stamps
+  - `git checkout envelope` 
   - Delayed letter
     - `delay`
   - Extra info for transports/internal working
   - Rarely used by me
 - Middleware
+  - `git checkout middleware`
   - Keep consumer running and restart on failure
     - Supervisor
     - Docker
     - k8s
     - ! Watch out for memory limits, add memory-limit, limit messages
       - Reset on message
+- Recap
+- Closing
+  - Symfony docs messenger
+  - Missing UI for view messages/easy retry
 
 - Differences between Laravel Horizon?
