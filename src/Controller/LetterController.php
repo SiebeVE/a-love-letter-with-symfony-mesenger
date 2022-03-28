@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Letter;
 use App\Form\LetterType;
-use App\LetterService\LetterService;
+use App\Message\SentLetter;
 use App\Repository\LetterRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class LetterController extends AbstractController
@@ -22,7 +23,7 @@ class LetterController extends AbstractController
     }
 
     #[Route('/new', name: 'app_letter_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, LetterRepository $letterRepository, LetterService $letterService): Response
+    public function new(Request $request, LetterRepository $letterRepository, MessageBusInterface $bus): Response
     {
         $letter = new Letter();
         $form = $this->createForm(LetterType::class, $letter);
@@ -30,7 +31,9 @@ class LetterController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $letterRepository->add($letter);
-            $letterService->send($letter);
+            $bus->dispatch(
+              new SentLetter($letter->getId())
+            );
             return $this->redirectToRoute('app_letter_index', [], Response::HTTP_SEE_OTHER);
         }
 
